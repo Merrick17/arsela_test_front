@@ -1,7 +1,7 @@
-import {combineReducers} from 'redux'
+import { combineReducers } from 'redux'
 
 import formReducer from './forms.reducer'
-
-const rootReduer = combineReducers({ formReducer })
+import formListReducer from './formlist.reducer'
+const rootReduer = combineReducers({ formReducer, formListReducer })
 
 export default rootReduer

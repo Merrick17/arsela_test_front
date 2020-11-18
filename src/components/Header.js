@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
@@ -20,21 +21,21 @@ const Header = () => {
 
       <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">
+          <li class="nav-item ">
+            <Link class="nav-link" to="/">
               Add Form
               <span class="sr-only">(current)</span>
-            </a>
+            </Link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <Link class="nav-link" to="/submit">
               Submit Form
-            </a>
+            </Link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <Link class="nav-link" to="/display">
               Display Form Value
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

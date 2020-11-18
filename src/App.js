@@ -9,18 +9,22 @@ import AddForm from './screens/AddForm'
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
+import SubmitForm from './screens/SubmitForm'
+import DisplayData from './screens/DisplayData'
 function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <Header />
-        <div className="container">
-          <Router>
+        <Router>
+          <Header />
+          <div className="container">
             <Switch>
+              <Route path="/display" component={DisplayData} />
+              <Route path="/submit" component={SubmitForm} />
               <Route path="/" component={AddForm} />
             </Switch>
-          </Router>
-        </div>
+          </div>
+        </Router>
       </div>
     </Provider>
   )

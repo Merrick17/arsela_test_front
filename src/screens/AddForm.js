@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addField } from '../actions/form.action'
+import { submitNewForm } from '../actions/formlist.action'
+
 import InputField from '../components/InputField'
 const AddForm = () => {
   const formFields = useSelector((state) => state.formReducer)
@@ -9,6 +11,11 @@ const AddForm = () => {
   const [fieldType, setFieledType] = useState('text')
   const [formTitle, setFormTitle] = useState('')
   const [formDesc, setFormDesc] = useState('')
+  const Clear = () => {
+    setFieled('')
+    setFormDesc('')
+    setFormDesc('')
+  }
   return (
     <div>
       <div class="jumbotron">
@@ -34,7 +41,21 @@ const AddForm = () => {
             />
           </div>
           <div className="col">
-            <button className="btn btn-primary">Submit Form </button>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                let fields = formFields.map((elm) => {
+                  return {
+                    fieldType: elm.type,
+                    name: elm.name,
+                  }
+                })
+                dispatch(submitNewForm(formTitle, formDesc, fields))
+                Clear()
+              }}
+            >
+              Submit Form{' '}
+            </button>
           </div>
         </div>
         <hr />
@@ -60,7 +81,7 @@ const AddForm = () => {
                   setFieledType(event.target.value)
                 }}
               >
-                <option value="text" selected={true}>
+                <option value="text" defaultValue={true}>
                   Text
                 </option>
                 <option value="date">Date</option>

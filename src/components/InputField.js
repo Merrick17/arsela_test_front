@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { changeFieldValue } from '../actions/form.action'
-const InputField = ({ name, index, type, value }) => {
+const InputField = ({ name, index, type, value ,id }) => {
   const dispatch = useDispatch()
   return (
     <div className="row form-group">

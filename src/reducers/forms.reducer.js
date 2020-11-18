@@ -1,6 +1,6 @@
 const intialForm = []
 
-const formReducer = (state=intialForm, action) => {
+const formReducer = (state = intialForm, action) => {
   switch (action.type) {
     case 'ADD_FORM_FIELD':
       return [...state, action.payload]
@@ -12,9 +12,12 @@ const formReducer = (state=intialForm, action) => {
       }
       newForm[action.payload.index] = field
       return newForm
-
+    case 'GET_EXISITING_FORM':
+      return action.payload
+    case 'CLEAR_FIELDS':
+      return []
     default:
-     return state
+      return state
   }
 }
 

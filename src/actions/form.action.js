@@ -18,3 +18,10 @@ export const changeFieldValue = (index, value) => (dispatch) => {
     },
   })
 }
+
+export const getExistingFields = (fields) => (dispatch) => {
+  dispatch({
+    type: 'GET_EXISITING_FORM',
+    payload: fields,
+  })
+}
