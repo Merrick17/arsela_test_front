@@ -20,7 +20,7 @@ const AddForm = () => {
     dispatch({
       type: "CLEAR_FIELDS",
     });
-  })
+  },[])
   return (
     <div>
       <div class="jumbotron">
