@@ -1,39 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import axios from 'axios'
-import { getAllForms } from '../actions/formlist.action'
-import _, { map } from 'underscore'
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllForms } from "../actions/formlist.action";
 const DisplayData = () => {
-  function extractArrayFromKey(ArrayOfObjects, WantedKey) {
-    return ArrayOfObjects((obj) => {
-      let val = null
-      Object.entries(obj).forEach(([key, value]) => {
-        if (key == WantedKey) val = value
-      })
-      return val
-    })
-  }
-
-  const formList = useSelector((state) => state.formListReducer)
-  const [selectedFormID, setSelectedFormID] = useState('')
-  const getAllData = async () => {
-    let result = await axios.get(
-      'http://localhost:3500/values/5fb4ecc0a9bfd143595c9b4e',
-    )
-    console.log(result.data)
-    let array = result.data.msg.flat()
-    let result2 = array.map((elm) => {
-      if (elm.fieldName == 'test') {
-        return elm.value
-      }
-    })
-    console.log(result2)
-  }
+  const dispatch = useDispatch();
+  const formList = useSelector((state) => state.formListReducer);
+  const [selectedFormID, setSelectedFormID] = useState("");
 
   useEffect(() => {
-    //dispatch(getAllForms())
-    getAllData()
-  }, [])
+    dispatch(getAllForms());
+  }, []);
   return (
     <div>
       <div className="row">
@@ -68,7 +43,7 @@ const DisplayData = () => {
         </table>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DisplayData
+export default DisplayData;

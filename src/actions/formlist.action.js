@@ -26,11 +26,20 @@ export const getAllForms = () => async (dispatch) => {
   })
 }
 
+// export const submitFormValue = (_id, values) => async (dispatch) => {
+//   let data = {
+//     form: _id,
+//     values: values,
+//   }
+//   let response = await axios.put(`${BASE_URL}/values/submit`, data)
+//   console.log(response.data)
+// }
+
 export const submitFormValue = (_id, values) => async (dispatch) => {
   let data = {
-    form: _id,
+    // form: _id,
     values: values,
   }
-  let response = await axios.post(`${BASE_URL}/values/submit`, data)
+  let response = await axios.put(`${BASE_URL}/form/${_id}/addanswers`, data)
   console.log(response.data)
 }

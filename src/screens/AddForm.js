@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addField } from '../actions/form.action'
 import { submitNewForm } from '../actions/formlist.action'
@@ -16,6 +16,11 @@ const AddForm = () => {
     setFormDesc('')
     setFormDesc('')
   }
+  useEffect(()=>{
+    dispatch({
+      type: "CLEAR_FIELDS",
+    });
+  })
   return (
     <div>
       <div class="jumbotron">

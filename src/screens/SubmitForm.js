@@ -1,49 +1,56 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import InputField from '../components/InputField'
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import InputField from "../components/InputField";
 import {
   getAllForms,
   submitFormValue,
   submitNewForm,
-} from '../actions/formlist.action'
-import { getExistingFields } from '../actions/form.action'
+} from "../actions/formlist.action";
+import { getExistingFields } from "../actions/form.action";
 const SubmitForm = () => {
-  const dispatch = useDispatch()
-  const formList = useSelector((state) => state.formListReducer)
-  const fields = useSelector((state) => state.formReducer)
-  const [selectedFormID, setSelectedFormID] = useState('')
+  const dispatch = useDispatch();
+  const formList = useSelector((state) => state.formListReducer);
+  const fields = useSelector((state) => state.formReducer);
+  const [selectedFormID, setSelectedFormID] = useState("");
   useEffect(() => {
-    dispatch(getAllForms())
-  }, [])
+    dispatch(getAllForms());
+    dispatch({
+      type: "CLEAR_FIELDS",
+    });
+  }, []);
   return (
     <div>
       <div class="jumbotron">
         <div className="row form-group">
           <div className="col form-group">
             <label>Forms List</label>
+
             <select
               class="form-control"
               onChange={(event) => {
-                setSelectedFormID(event.target.value)
-                console.log(event.target.value)
+                setSelectedFormID(event.target.value);
+                console.log(event.target.value);
                 let selectedForm = formList.find(
-                  (elm) => elm._id == selectedFormID,
-                )
-                console.log('Selected Form', selectedForm)
+                  (elm) => elm._id == selectedFormID
+                );
+
                 if (selectedForm) {
                   let inputFiels = selectedForm.inputs.map((elm, ind) => {
                     return {
                       name: elm.name,
-                      value: '',
+                      value: "",
                       index: ind,
                       type: elm.fieldType,
                       _id: elm._id,
-                    }
-                  })
-                  dispatch(getExistingFields(inputFiels))
+                    };
+                  });
+                  dispatch(getExistingFields(inputFiels));
                 }
               }}
             >
+              <option value={""} disabled={true}>
+                Select A Form
+              </option>
               {formList.map((elm) => (
                 <option value={elm._id} key={elm._id}>
                   {elm.title}
@@ -75,9 +82,9 @@ const SubmitForm = () => {
                   return {
                     fieldId: elm._id,
                     value: elm.value,
-                  }
-                })
-                dispatch(submitFormValue(selectedFormID, values))
+                  };
+                });
+                dispatch(submitFormValue(selectedFormID, values));
               }}
             >
               Submit
@@ -86,7 +93,7 @@ const SubmitForm = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SubmitForm
+export default SubmitForm;
